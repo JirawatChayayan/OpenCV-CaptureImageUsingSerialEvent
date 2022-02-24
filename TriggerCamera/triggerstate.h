@@ -34,9 +34,14 @@ class TriggerInput {
                 return false;
                 break;
             case 1:
-                if(millis()-t1>50)
+                if(millis()-t1>waitMs)
                 {
                    statemachine = 2;
+                   if(!ip)
+                   {
+                      statemachine = 0;
+                      return false;
+                   }
                    return true;
                 }
                 return false;

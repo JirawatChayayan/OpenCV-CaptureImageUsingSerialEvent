@@ -2,8 +2,8 @@
 String inputString = "";         // a String to hold incoming data
 bool stringComplete = false;  // whether the string is complete
 
-TriggerInput inputRun(D1,10);
-TriggerInput inputSetup(D2,10);
+TriggerInput inputRun(D1,20);
+TriggerInput inputSetup(D2,20);
 
 bool SetupMode = true;
 
