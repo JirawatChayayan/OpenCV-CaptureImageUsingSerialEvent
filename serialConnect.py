@@ -19,7 +19,7 @@ class TriggerCommunication:
     def openSerialPort(self,isReconnect = False):
         self.serialHandle = None
         try:
-            self.serialHandle = serial.Serial('COM7', self.buadrate)
+            self.serialHandle = serial.Serial('COM10', self.buadrate)
             if(not isReconnect):
                 self.threadRead = threading.Thread(target=self.readSerial)
                 self.threadRead.start()
@@ -55,11 +55,9 @@ class TriggerCommunication:
     def sendSerial(self,ProcessMode):
         if(self.serialHandle is not None):
             if(ProcessMode):
-                data = {'Mode':'Process'}
-                self.serialHandle.write(("{\"Mode\":\"Setup\"}"+"\n").encode())
-            else:
-                data = {'Mode':'Setup'}
                 self.serialHandle.write(("{\"Mode\":\"Process\"}"+"\n").encode())
+            else:
+                self.serialHandle.write(("{\"Mode\":\"Setup\"}"+"\n").encode())
             #self.serialHandle.write("\n".encode())
     def readSerial(self):
         print('Serial Ready')
