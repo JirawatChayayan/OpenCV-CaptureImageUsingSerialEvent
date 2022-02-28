@@ -10,8 +10,6 @@ def Capture():
         if(status):
             cv.imshow('frame_bgr',img)
 
-
-
 if __name__ == '__main__':
     cam.connection()
     if(cam.camConnected):
@@ -20,8 +18,13 @@ if __name__ == '__main__':
         trig.openSerialPort()
         Capture()
         while True:
-            if(cam.delay(1,'q')):
+            key = cv.waitKey(1)
+            if(key == ord('q')):
                 break
+            elif(key == ord('s')):
+                trig.sendSerial(False)
+            elif(key == ord('p')):
+                trig.sendSerial(True)
         cam.disconnect()
         cv.destroyAllWindows()
         trig.closeSerialPort()

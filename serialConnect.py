@@ -1,24 +1,5 @@
-# import serial
-# import json
-# ser = serial.Serial("COM7", 115200)
 
-
-
-
-
-# while True:
-#     try:
-#         cc=str(ser.readline())
-#         cleanMsg = cc[2:][:-5]
-#         splitData = cleanMsg.split(';')
-#         if(splitData[0]== 'Trig'):
-#             cmd = json.loads(splitData[1])
-#             print('Trigger From Mode : {0}'.format(cmd['Mode']))
-#     except:
-#         pass
-
-from fileinput import close
-import threading, multiprocessing
+import threading
 import time
 import serial
 import sys
@@ -71,7 +52,15 @@ class TriggerCommunication:
         except:
             pass
         
-
+    def sendSerial(self,ProcessMode):
+        if(self.serialHandle is not None):
+            if(ProcessMode):
+                data = {'Mode':'Process'}
+                self.serialHandle.write(("{\"Mode\":\"Setup\"}"+"\n").encode())
+            else:
+                data = {'Mode':'Setup'}
+                self.serialHandle.write(("{\"Mode\":\"Process\"}"+"\n").encode())
+            #self.serialHandle.write("\n".encode())
     def readSerial(self):
         print('Serial Ready')
         while not self.stopped.is_set():
@@ -84,6 +73,8 @@ class TriggerCommunication:
                     #print('Trigger From Mode : {0}'.format(cmd['Mode']))
                     for fn in self.callbacks:
                         fn()
+                else:
+                    print(cleanMsg)
             
             except KeyboardInterrupt: #Capture Ctrl-C
                 print ("Captured Ctrl-C")

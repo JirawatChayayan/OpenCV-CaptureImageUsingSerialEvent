@@ -1,33 +1,45 @@
+#include <ArduinoJson.h>
+
 #include "triggerstate.h"
 String inputString = "";         // a String to hold incoming data
 bool stringComplete = false;  // whether the string is complete
 
-TriggerInput inputRun(D1,20);
-TriggerInput inputSetup(D2,20);
+TriggerInput inputRun(11,20);
+TriggerInput inputSetup(12,20);
 
 bool SetupMode = true;
+
+DynamicJsonDocument modeJson(1024);
 
 void setup() {
   Serial.begin(115200);
   delay(10);
-  Serial.println("");
   Serial.println("###############################################################");
   Serial.println("# Command ChangeMode: {\"Mode\":\"Setup\"} and {\"Mode\":\"Process\"} #");
-  Serial.println("###############################################################\r\n\r\n");
+  Serial.println("###############################################################");
   inputString.reserve(200);
+  modeJson["Mode"] = "Setup";
 }
 
 void loop() {
   if (stringComplete) {
-    if(inputString == "{\"Mode\":\"Setup\"}")
+    
+    if(modeJson["Mode"] == "Setup")
     {
       SetupMode = true;
+      String res = "{\"Mode\":\"Setup\"}";
+      printMsg(true, res);
     }
-    else if(inputString == "{\"Mode\":\"Process\"}")
+    else if(modeJson["Mode"] == "Process")
     {
       SetupMode = false;
+      String res = "{\"Mode\":\"Process\"}";
+      printMsg(true,res);
     }
-    printMsg(true,inputString);
+    else
+    {
+      printMsg(true,inputString + " Other");
+    }
     inputString = "";
     stringComplete = false;
   }
@@ -74,6 +86,11 @@ void serialEvent() {
     if (inChar == '\n') 
     {
       stringComplete = true;
+      String str = inputString;
+      int str_len = str.length() + 1; 
+      char char_array[str_len];
+      str.toCharArray(char_array, str_len);
+      deserializeJson(modeJson, char_array);
     }
     else
     {
