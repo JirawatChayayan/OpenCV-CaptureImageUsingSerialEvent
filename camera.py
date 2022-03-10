@@ -14,12 +14,14 @@ class Camera:
         self.source = int(source)
         self.camConnected = False
 
-    def connection(self):
+    def connection(self,width=1366,height=768):
         try:
             if(self.camMode == CameraMode.RTSP):
                 self.cam = cv.VideoCapture(self.source,cv.CAP_FFMPEG)
             else:
                 self.cam = cv.VideoCapture(self.source)
+                self.cam.set(cv.CAP_PROP_FRAME_WIDTH, width)
+                self.cam.set(cv.CAP_PROP_FRAME_HEIGHT, height)
             self.camConnected = True
         except Exception as ex:
             print(ex)
