@@ -1,0 +1,347 @@
+Quick 'n Easy FTP Server - Programmed by Pablo van der Meer
+
+[01/01/2002] Version 1.01
+- Initial release
+
+[02/02/2002] Version 1.04
+- Several bug fixes
+
+[05/20/2002] Version 1.05
+- Major update!
+- Added User Account Wizard
+- Added Security Page
+- Added transfer bytes counters
+- and much more
+
+[06/24/2002] Version 1.06
+- Minor bug fix in credits.
+
+[06/25/2002] Version 1.07
+- Added Integrated Help
+- Window position is now saved.
+- Fixed application Icon.
+
+[07/12/2002] Version 1.08
+- Added support for BYE and QUIT commands
+- Dirty fix for CWD /../../../ which introduced a big security hole (working on a better solution)
+- Fixed bug in Online users list.
+
+[07/14/2002] Version 1.09
+- Rewrote access checks/user management so it can handle CWD /../../ correctly
+- Fixed bug in virtual directories.
+- Simplified ParseCommand a little
+- Added credits for FileZilla (on which parts of this server are based).
+- SendReponse can now handle variable argument.
+
+[07/21/2002] Version 1.10
+- Fixed security hole in GetDirectoryList (LIST \..\) (thanks to: http://www.securiteinfo.com)
+- Added support for REST and HELP commands.
+
+[07/29/2002] Version 1.11
+- Fixed problem with PASV mode (socket timing issue).
+
+[07/29/2002] Version 1.12
+- Another small problem with PASV mode (WININET).
+- Added support for wildcard in security (199.199.* -> blocks 199.199.0.0 to 199.199.255.255)
+
+[08/27/2002] Version 1.2
+- User management dialog now part of other configuration pages.
+- Fixed lots of small UI issues. Special thanks to Edwin Brunner.
+- Re-designed FTP communication classes to make the application robust and get much nicer code.
+- PASV/Normal mode are now handled exactly the same for data transfers.
+- Added support for APPE, NLST, XCWD, XMKD, XPWD and XRMD commands.
+- Fixed some problems regarding virtual directories.
+- Listing of root drives now works correctly (thanks to: Edwin Brunner)
+- Easier IP management (Security page)
+- Directory listing now also possible when user has upload rights for specific directory.
+- Added icon buttons.
+
+[10/10/2002] Version 1.3
+- Better theme support for Windows XP (CIconButton updated)
+- Optimized some routines
+
+[10/11/2002] Version 1.31
+- fix uxtheme.dll delayload setting.
+
+[10/19/2002] Version 1.4
+- CStarWarsCtrl updated (fixed problem in XP).
+- Fixed bug in STOR command -> connection blocked when data was send before server was ready to receive data.
+
+[10/22/2002] Version 1.5
+- UI update: Windows XP style (with alpha channel) icons.
+
+[11/01/2002] Version 1.51
+- Fixed security vulnerability: sending %n%n%n (and other c-formating strings) crashed the system (thanks to www.idefense.com).
+- Added exception handler to prevent more (unknown) formating problems.
+
+[11/14/2002] Version 1.52
+- IP address for PASV mode can now be configured (in case of firewall problems) Configuration->IP address
+- Browse for folder dialogs now remember their previous folder, also uses new dialog style (IE 5.0)
+
+[11/22/2002] Version 1.53
+- Anonymous accounts are now working. Just add 'anonymous' user and leave password blank.
+
+[11/22/2002] Version 1.54
+- Bugfix: slashes in some pathnames were not correctly handled. This resulted in various problems when running under Win9x/ME (thanks to Adem Edturk for the bugreport).
+
+[12/01/2002] Version 1.55
+- Fixed CIconButtons now so it acts like a 'real' XP themed button.
+- Fixed security vulnerability: Sending an incorrect PORT command could crash the server (Thanks to: Bram Staps).
+- Added a general exception handler, so that any incorrect command will not bring down the server.
+
+[12/15/2002] Version 1.56
+- Fixed problem with NLST * and LIST * (for example used by mget *).
+- Fixed problem with resume download/upload (APPE/STOR/RETR).
+- Statistics will now be saved between sessions. Context menu in Statistics Page allows you to reset statistics.
+
+[12/22/2002] Version 1.57
+- NEW: Max. connections/IP determines the maximum number of simultaneous connections per IP address.
+- Merry Christmas!
+
+[12/29/2002] Version 1.58
+- NEW: You can now set the thread priority for the connection threads.
+- NEW: Online users page now displays current status of the connection (downloading/uploading)
+- Updated help file and added FAQ.
+- Saved passwords (in user.dat) are now encrypted.
+- Some minor UI changes.
+- Happy New Year!
+
+[01/24/2003] Version 1.59
+- If explorer.exe is restarted (after a crash), the taskbar icon will be added again.
+- Replaced ON_MESSAGE by ON_THREAD_MESSAGE in CConnectThread (because of error in VC++7.0 and possible stack problems.
+
+[02/16/2003] Version 1.60
+- Fixed bug in security manager (thanks to Will Tieleman)
+- Fixed problem that occurred when PORT command was executed before data connection was destroyed. ("425 Can't open data connection.")
+- Improved end of transfer mechnisme.
+- LIST parameters (like -a -l -r) are now ignored instead of generating an error.
+- Added menu items for Clear trace and Clear statistics.
+
+[02/27/2003] Version 1.61
+- Minor change in LIST command handler.
+
+[03/19/2003] Version 1.62
+- Home directory/Apply button fixed.
+- Fixed bug with file/directories older than 350 days (some FTP clients didn't show first letter in listing).
+- Fixed bug in CWD command when filename was given (instead of directory). Many Mac users found that this could cause problems while downloading files.
+- Fixed bug in aboutbox when using a fast computer...
+- Added extra option to Wizard, so it's easier to create an anonymous account.
+- Some minor improvements in serveral modules.
+
+[03/29/2003] Version 1.63
+- Improved exception handler (under construction).
+
+[03/30/2003] Version 1.64
+- Fixed serious security hole in the server. It was possible to get the access rights from another user by logging in with username1 + wrong password and then logging with username2 + right password. (thanks to Julien Blanc!)
+
+[05/17/2003] Version 1.7
+- Changed the way file size is being displayed.
+- Configuration Page is reorganized.
+- Added keyboard accelaration keys for a couple of items.
+- Added new option for directory listing time format: local time or UTC.
+- Added new help menu item: What's my IP address.
+- Trace window has a lot of new menu options like: copy to clipboard, save to file, show date/time.
+- You can now specify a range of ports for PASV mode! (for better firewall support).
+- Updated help file.
+
+[05/28/2003] Version 1.71
+- Security fix for various DOS vulnerabilities (thanks to: Dr. Insane!)
+- Unidentified connections are now also displayed in 'Online Users' as 'Not logged in'.
+
+[08/01/2003] Version 1.72
+- Fixed: Add IP address to block list caused application lockup (thanks to: Sylvain Pappo).
+- Fixed: Exception in CTracePage::OnAddTraceLine().
+- Fixed: '426 Connection closed; transfer aborted' while uploading small files.
+- Fixed: Exit menu.
+- Added 'Show hidden files' option in Configuration.
+
+[08/12/2003] Version 1.73
+- A few user requests:
+- Added Password mask. Registry key: (DWORD: MaskPassword, default: 1)
+- Added Trace option: 'Insert on top'.
+- Added Shutdown confirmation on close button: Registry key: (DWORD: ConfirmExit, default: 1)
+- Added maximum log entries. Registry key: (DWORD: MaxEntries, default: 1000)
+
+[09/24/2003] Version 1.74
+- Fixed: LIST command now also displays LIST <FILENAME> correctly.
+- Fixed: UNC paths and roots in Virtual Directories.
+- Added Copy button in 'User Accounts' to simply duplicate an user account.
+
+[10/14/2003] Version 1.75
+- Fixed: System tray popup menu is closed when loosing focus.
+- Added: System tray icon displays status of the server (on/off).
+
+[11/14/2003] Version 1.76
+- Fixed: Some FTP clients displayed both upper and lower-case directories.
+- Fixed: Case of directory and file names will be corrected (in response to client).
+- Added: Gradient to AboutBox
+
+[12/25/2003] Version 1.77
+- Fixed: On some systems the correct filename conversion did not work, now the shellname is returned.
+
+[01/15/2004] Version 1.80
+- Fixed: Minor security vulnerability in error response (550 Permission denied vs 550 File not found) thanks to: http://www.securiteinfo.com
+
+[02/08/2004] Version 2.00
+- Fixed: Bug in directory listing (files more than 350 days old had an extra space)
+- Fixed: Bug in directory listing on non-English Windows versions.
+- Improved crash detection (exceptions will now write a stack dump in the logfile).
+- Improved stability by making FTP server classes more thread safe.
+- New user interface: XP Luna Look (even on Windows 9x/NT/2000) can also be switch off...
+- Added TaskPane
+- Added XP Office 2003 menu's
+- Changes now become directly active.
+- Added context menu's and lots of other UI enhancements.
+- Welcome message can now be multiple lines.
+- Added: Remote administration commands (SITE LISTUSER, SITE ADDUSER, SITE DELUSER, SITE DESCUSER, SITE SETATTR, 
+	SITE LISTPATH, SITE ADDPATH, SITE DELPATH, SITE LISTIP, SITE ADDIP, SITE DELIP, SITE WHO, SITE KICK).
+- Added: SITE MSG command (so clients can send messages to the server console).
+- Added: FEAT and MDTM commands.
+- Added: Default home directory in configuration (used in when new users is added).
+- Added: PASV option: Get IP from remote server for better router support.
+- Users/Security configuration is now saved in XML format.
+- Added: Integrated download/upload statistics.
+- Added: Transfer progress in Online Users window.
+- Added: Option to configure maximum download/upload speed per user.
+- Removed: Thread priority option.
+- Added: commandline option (/f) to specify custom configuration file: /fconfig.ini (uses config.ini to load/save settings instead of the registry)
+- Added: better support for wildcards in LIST and NLST.
+- And much more...
+
+[02/22/2004] Version 2.01
+- Fixed: Bug in XML routines cause some passwords to become invalid after restart.
+- Fixed: QUIT and BYE command now return 221 instead of 220.
+
+[03/04/2004] Version 2.02
+- Fixed: LIST command didn't accept directories with dashes.
+- Fixed: Accelerator keys (F1 ... F12)
+- Added: Almost all strings are now stored in the resources, so it's easier to translate the application to another language.
+- Added: You can now specify ranges in the security IP filter.
+- And some other minor changes to improve the quality of the code.
+
+[03/16/2004] Version 2.03
+- Fixed: Bug in 'Failed Uploads' v.s. strange download manager behaviour... (Thanks to Soul!).
+
+[05/02/2004] Version 2.04
+- Fixed: MKD now returns 257 (instead of 250) (Thanks to Owen!)
+- Fixed: Sending MSG %s could crash the server! (Thanks to AkirA!)
+- Fixed: Better handling of invalid characters. Removed some overhead in string manupulations.
+
+[05/08/2004] Version 2.0.5
+- Fixed: Forgot to re-enable messages console in previous fix :(
+
+[06/08/2004] Version 2.1
+- Log file class completely rewritten in MFC.
+- Fixed: Problems with UI/thread synchronisation could cause exceptions (finally found it!)
+- Fixed: Sometimes the security mode was not saved between sessions.
+- Fixed: 'What is my IP address?' option now also work when 'Get ip from remote server' is set.
+- Added: Support for files larger than 2 GB (64 bits).
+- Added: 'Allow Directory Browse' option in User Accounts.
+- Added: FTP Server setup wizard, to quickly configure the server.
+- Added: Help information for router/firewall owners.
+
+[06/12/2004] Version 2.11a
+- Fixed: Invalid USERS.XML (virtual directory order) could cause corrupted User Accounts (thanks to Otoplenie.org!)
+- Fixed: View and Clear button on Configuration page (thanks to Alexander!)
+- Fixed: When skinned scrollbar was active, a large number of user accounts made the user list disappear... (thanks to Harold!)
+- Added: Checkbox for 'hidden' option: Disable skinned scrollbar. Usefull if you already run XP in 'Themed mode'.
+
+[06/14/2004] Version 2.12
+- Fixed: TaskPane bug deleting collapsed items could cause an exception (thanks to Alexander!)
+- Fixed: Compatibility with Win9x/NT4 issues.
+- Fixed: Some minor issues with 64 bits values.
+
+[07/02/2004] Version 2.14
+- Fixed: Compatibility issues with CuteFTP Clients (and probably some other FTP clients) thanks to Mark!
+- Added: Tray Icon tooltip now shows number of online users.
+
+[07/10/2004] Version 2.2
+- Fixed: Allow directory listing is now also available in remote administration commands.
+- Fixed: Virtual directory did not show 'List' option in UI.
+- Fixed: Virtual directory problems when mapped to root drive.
+- Fixed: If 'Getting IP from remote server' failed, PASV mode did get 'confused'.
+- Fixed: TaskPane now uses Windows Color Scheme when XP-look is disabled.
+- Added: Detailed trace info for 'Getting IP from remote server'.
+- Added: Improved Remote administration command documentation (in help file).
+- Added: Configuration Tasks: 'Show Configuration help' and 'Frequently Asked Questions'
+
+[08/10/2004] Version 2.3
+- Fixed: GetPeerName failure could result in stability problems.
+- Fixed: Problems with corrupt XML files (improved XML character encoding).
+- Added: External changes to USERS.XML and SECURITY.XML can now be reloaded using  the commandline option: /c
+- Added: 'What is my IP address?" now validates the IP address (checks if it's a valid internet IP address).
+
+[09/05/2004] Version 2.4
+- Added: Disk quota(amount of uploaded bytes) to limit users disk space: when users deletes file(s) the value is decreased again.
+- Added: File Types Filter, to edit the displayed file types for the LIST command.
+- Changed: Layout of the User Accounts dialog.
+
+[10/05/2004] Version 2.4.1
+- Fixed: MFC's GetLength64() did not report correct file size in LIST command.
+- Fixed: Kick user did not work correctly for downloads.
+- Fixed: Transfer progress is now only displayed for downloads, since it's not possible to determine the status for uploads.
+- Fixed: Slightly changed error/exception handling.
+
+[10/22/2004] Version 2.4.2
+- Fixed: Some buggy firewalls could screw up socket handles when accepting new connections. The server can now 'detect' problems with incompatible firewalls (it might still crash, but at least you know why).
+
+
+[12/18/2004] Version 2.5
+- Fixed: Show Time/Show Date modes did not get saved correctly (Thanks to: Peter!).
+- Fixed: PASV mode response was incorrect, this could cause problems with some firewalls (Thanks to Gary!).
+- Fixed: Disk Quota configuration did not handle file size larger than 2GB correctly.
+- Fixed: Disk Quota bug -> When a user was logged in more that once, the disk quota was reset.
+- Added: Option to Show Virtual Path in Online Users (instead of physical path).
+
+[12/25/2004] Version 2.5.1
+- Fixed: Another disk quota bug...
+
+[12/02/2005] Version 2.6
+- Fixed: If max disk quota is reached at the start of the file transfer it will no longer attempt to create the file.
+- Fixed: SITE HELP command
+- Fixed: SITE ADDPATH and SETATTR do now accept path names with spaces, just replace the space with a plus (+)
+so 'C:\Program Files' must be entered as 'C:\Program+Files'
+- Added: New about box...
+- Added: More Frequently Asked Questions in the FAQ section.
+
+[02/24/2005] Version 2.6.1
+- Fixed: Synchronisation problems with disk quota for FTP clients that reuse the control socket for multi downloads.
+- Added: Delete incomplete uploads option (see help file for more details).
+- Added: Allow quota overflow option (see help file for more details).
+
+[04/30/2005] Version 2.7
+- Added: Support for XCRC command.
+- Copyrights Updated.
+
+[07/30/2005] Version 3.0
+- Fixed: XCRC bug.
+- Fixed: Improved 'kick user' code.
+- Fixed: Insert on top FIFO bug.
+- Added: OneNote style tabs
+- Added: New (copyrighted!) images/icons.
+- Added: Homepage for common tasks, 
+- Added: User account settings now are organized in different tab pages.
+- Added  Easier configuration for advanced user account settings.
+- Added: Server configuration settings now are organized in different tab pages.
+- Added: Support for PSWD command (allows the user to change the password).
+- Added: Option to enable/disable PSWD command per user.
+- Added: Online users page can now display average transfer speed.
+- Added: Info page for generic user information.
+- Added: Statistics refresh interval
+- Added: Configurable default page on startup.
+- Added: Events configuration to play a sound or launch an application for specific FTP server events.
+- Added: New security setting to disable FXP and bounce attacks (allow foreign IP address for PORT command)
+
+[01/01/2006] Version 3.0.1
+- Minor change in demo version: Increase timout.
+
+[05/02/2006] Version 3.0.2
+- Made small modification in buffer overflow protection
+
+[08/10/2006] Version 3.1
+- Improved: Several minor improvements.
+- Added: New security setting to automatically block address after X failed login attempts.
+
+[03/16/2007] Version 3.2
+- Fixed: Compatibility problems on Windows 2003 and Windows Vista.
+- Improved: Redesigned help file so it also works on Windows Vista.
