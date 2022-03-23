@@ -45,8 +45,8 @@ class Camera:
     
 
 if __name__ == '__main__':
-    cam = Camera()
-    cam.connection()
+    cam = Camera(0,CameraMode.Camera)
+    cam.connection(1920,1080)
     if(cam.camConnected):
         while True:
             status,img = cam.grabImg()
